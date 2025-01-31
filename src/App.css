@@ -1,0 +1,21 @@
+#root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* height: 100vh; */
+    /* box-sizing: border-box; */
+
+    /* display: grid;
+    grid-template-columns: 300px 1fr; */
+}
+
+.maincontent {
+    /* border: 1px solid blue; */
+
+    margin-left: 270px; /* Отступ слева для учета ширины бокового меню */
+    /* min-height: 100vh; Чтобы основной контент растягивался на всю высоту */
+}
+
+a.active {
+    border: 2px dashed var(--colorYellowVivid); /*стиль для выделения активного меню навигации*/
+}
