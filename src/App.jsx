@@ -1,10 +1,10 @@
 // import { useState } from 'react'
+import { Routes, Route } from 'react-router';
 import Sidebar from './components/Sidebar/Sidebar';
 import PageHome from './components/PageHome/PageHome';
 import PageWords from './components/PageWords/PageWords';
 import PagePractice from './components/PagePractice/PagePractice';
 import PageNoFound from './components/PageNoFound/PageNoFound';
-import { Routes, Route } from 'react-router';
 import './App.css';
 import './variables.css';
 

@@ -1,9 +1,3 @@
-/* div,
-p,
-img {
-    border: 1px solid red;
-} */
-
 .pageNoFoundContainer {
     display: flex;
     flex-direction: row;

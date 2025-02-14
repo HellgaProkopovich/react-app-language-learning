@@ -1,8 +1,8 @@
+import { Link, NavLink } from 'react-router';
 import logo from '../../assets/greek.svg';
 import iconWords from '../../assets/list.svg';
 import iconPractice from '../../assets/exercise-horse.svg';
 import styles from './sidebar.module.css';
-import { Link, NavLink } from 'react-router';
 
 const Sidebar = () => {
    return (

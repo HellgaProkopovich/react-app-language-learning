@@ -8,26 +8,8 @@
     white-space: nowrap;
 }
 
-.titleHome {
-    color: var(--colorYellowVivid);
-    font-size: 50px;
-    font-weight: bold;
-    margin: 0;
-}
-
 .picHome {
     margin: 75px;
     min-width: 200px;
     max-width: 200px;
-}
-
-.textHome {
-    font-size: x-large;
-    text-decoration: underline dashed var(--colorYellowVivid);
-    text-underline-offset: 5px;
-}
-
-.textGreyHome {
-    color: var(--colorGreyDark);
-    font-style: italic;
 }

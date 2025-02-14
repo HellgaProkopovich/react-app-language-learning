@@ -6,14 +6,14 @@ import styles from './pageWords.module.css';
 const PageWords = () => {
    return (
       <div className={styles.wordsListContainer}>
-         <p className={styles.textGrey}>[the words]</p>
-         <h1 className={styles.title}>οι	λέξεις</h1>
+         <p className="textGrey">[the words]</p>
+         <h1 className="title">οι	λέξεις</h1>
          <div className={styles.wordsTable}>
             <form action="" className={styles.formAddWordRow}>
                <label htmlFor=""><input type="text" placeholder='word in Greek' className={styles.formAddWordCell} /></label>
                <label htmlFor=""><input type="text" placeholder='translation' className={styles.formAddWordCell} /></label>
                <label htmlFor=""><input type="text" placeholder='word class' className={styles.formAddWordCell} /></label>
-               <button className={styles.formSaveBtn}>Save</button>
+               <button className={styles.formSaveBtn}>save</button>
             </form>
             {wordsList.map((word) => (
                <div
