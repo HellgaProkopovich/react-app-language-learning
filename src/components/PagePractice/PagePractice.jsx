@@ -9,17 +9,21 @@ const PagePractice = () => {
    // for rendering words from array
    const [currentIndex, setCurrentIndex] = useState(0);
 
+   // for counting number of learnt words
+   const [countLearntWords, setCountLearntWords] = useState(1);
+
    // for button 'check'
    const [clicked, setClicked] = useState(false); // хук: состояние, метод = начальное значение(показываем кнопку check)
    const handleClicked = () => {
-      setClicked(true) // показываем перевод при клике на check
+      setClicked(true); // показываем перевод при клике на check
+      setCountLearntWords(countLearntWords + 1);
    }
 
    // for btn prev
    const handlePrev = () => {
       setClicked(false);
       setCurrentIndex((index) => index - 1 < 0 // если индекс меньше нуля
-         ? wordsList.length - 1 // показываем самое последнее влово
+         ? wordsList.length - 1 // показываем самое последнее слово
          : index - 1); // а если нет, показываем предыдущее
    }
 
@@ -42,13 +46,13 @@ const PagePractice = () => {
                <p className="textGrey">{wordsList[currentIndex].wordclass}</p>
                {//условный рендеринг для отображения кнопки и перевода после клика по кнопке
                   !clicked 
-                  ? (<button className={styles.btnCheck} onClick={handleClicked}>check</button>)
+                  ? (<button className={styles.btnCheck} onClick={handleClicked} autoFocus>check</button>)
                   : (<p className={styles.wordTranslated}>{wordsList[currentIndex].wordenglish}</p>)
                }
             </div>
             <img src={btnNext} className={styles.btnNext} alt="btnNext" onClick={handleNext} />
          </div>
-         
+         <p className="textGrey">{countLearntWords} / {wordsList.length}</p>
       </div>
    )
 };
