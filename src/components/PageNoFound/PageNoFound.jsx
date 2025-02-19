@@ -1,4 +1,3 @@
-// import picMinotaur from '../../assets/minotaur.png';
 import picMinotaur from '../../assets/minotaur2.png';
 import styles from '../PageNoFound/pageNoFound.module.css'
 

@@ -26,10 +26,6 @@
     /* box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); */
 }
 
-p {
-    margin: 0;
-}
-
 .logo {
     text-decoration: none;
     color: var(--colorMainFont);

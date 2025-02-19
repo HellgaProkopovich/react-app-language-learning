@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import wordsList from '../words.js';
+
 import btnNext from '../../assets/arrow_right.svg';
 import btnPrev from '../../assets/arrow_left.svg';
 // import classNames from 'classnames';
@@ -18,6 +19,10 @@ const PagePractice = () => {
       setClicked(true); // показываем перевод при клике на check
       setCountLearntWords(countLearntWords + 1);
    }
+
+   // for autofocus on btn check
+   const ref = useRef();
+   useEffect(() => ref.current.focus(), [currentIndex]); // useEffect срабатывает каждый раз, когда currentIndex изменяется, то есть при смене слова, т.о. фокус на кнопке check устанавливается не один раз (при самом первом рендере), а каждый раз при смене currentIndex(смене слова)
 
    // for btn prev
    const handlePrev = () => {
@@ -44,9 +49,9 @@ const PagePractice = () => {
             <div className={styles.cardPractice}>
                <p className="textDashed">{wordsList[currentIndex].wordgreek}</p>
                <p className="textGrey">{wordsList[currentIndex].wordclass}</p>
-               {//условный рендеринг для отображения кнопки и перевода после клика по кнопке
+               {//условный рендеринг для отображения кнопки или перевода после клика по кнопке
                   !clicked 
-                  ? (<button className={styles.btnCheck} onClick={handleClicked} autoFocus>check</button>)
+                  ? (<button className={styles.btnCheck} onClick={handleClicked} ref={ref}>check</button>)
                   : (<p className={styles.wordTranslated}>{wordsList[currentIndex].wordenglish}</p>)
                }
             </div>

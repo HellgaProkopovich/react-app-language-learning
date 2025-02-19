@@ -1,0 +1,91 @@
+/* div,
+p,
+form {
+    border: 1px solid red;
+} */
+
+/* label {
+    border: 1px solid blue;
+} */
+
+.pageHelpContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 50px;
+}
+
+.formHelpContainer {
+    width: 75%;
+    max-width: 550px;
+    min-width: 400px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin: 50px 0;
+    padding: 30px;
+    border: 2px dashed var(--colorYellowVivid);
+    border-radius: 20px;
+}
+
+@media screen and (max-width: 800px) {
+    .formHelpContainer {
+        max-width: 300px;
+        min-width: 200px;
+        flex-direction: column;
+    }
+}
+
+.formHelpText {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+@media screen and (max-width: 800px) {
+    .formHelpText {
+        width: 100%;
+    }
+}
+
+/*moved to App.css 
+there are ALL styles for form Help*/
+
+/* .formHelp {
+    font-size: 14px;
+
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formHelp label {
+    white-space: nowrap;
+}
+
+.formHelp input,
+.formHelp select,
+.formHelp textarea {
+    font-family: inherit;
+    font-size: 14px;
+
+    width: 90%;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.formHelpInvalid {
+    border: 1px solid red;
+}
+
+.formHelp button {
+    width: 100px;
+    margin-top: 30px;
+    padding: 10px 20px;
+    align-self: flex-end;
+} */

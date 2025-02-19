@@ -1,4 +1,5 @@
 import wordsList from '../words.js';
+
 import iconEdit from '../../assets/icon-edit.svg';
 import iconDelete from '../../assets/icon-delete.svg';
 import styles from './pageWords.module.css';

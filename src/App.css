@@ -52,3 +52,64 @@ button {
 button:hover {
     background-color: var(--colorYellowVivid);
 }
+
+/* for help form
+need to rename if need to use in other form*/
+
+.formHelp {
+    font-size: 14px;
+
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media screen and (max-width: 800px) {
+    .formHelp {
+        width: 100%;
+    }
+}
+
+.formHelp label {
+    white-space: nowrap;
+}
+
+.formHelp input,
+.formHelp select,
+.formHelp textarea {
+    font-family: inherit;
+    font-size: 14px;
+
+    width: 95%;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.formHelpInvalid input,
+.formHelpInvalid select,
+.formHelpInvalid textarea {
+    border: 1px solid var(--colorYellowVivid);
+}
+
+.inputErrorText {
+    color: rgb(255, 72, 0);
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.formHelp button {
+    width: 100px;
+    margin-top: 30px;
+    padding: 10px 20px;
+    align-self: flex-end;
+}
+
+.formHelp button:disabled,
+.formHelp button:disabled:hover {
+    cursor: not-allowed;
+    background-color: var(--colorGreyDark);
+}
