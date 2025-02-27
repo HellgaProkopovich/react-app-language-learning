@@ -12,13 +12,23 @@ const PagePractice = () => {
 
    // for counting number of learnt words
    const [countLearntWords, setCountLearntWords] = useState(1);
+   const [learntWords, setLearntWords] = useState([]); // храним индексы уже изученных слов, чтобы шёл счёт только при первом клике на check
 
    // for button 'check'
    const [clicked, setClicked] = useState(false); // хук: состояние, метод = начальное значение(показываем кнопку check)
+
    const handleClicked = () => {
       setClicked(true); // показываем перевод при клике на check
-      setCountLearntWords(countLearntWords + 1);
-   }
+      // проверяем, есть ли уже это слово в списке изученных
+      if (!learntWords.includes(currentIndex)) { // если нет
+         setLearntWords([...learntWords, currentIndex]); // то добавляем новый индекс(слово)
+         setCountLearntWords(countLearntWords + 1); // и увеличиваем счётчик
+      }
+   };
+   // const handleClicked = () => { // тут идёт счёт при каждом нажатии на check
+   //    setClicked(true); // показываем перевод при клике на check
+   //    setCountLearntWords(countLearntWords + 1);
+   // }
 
    // for autofocus on btn check
    const ref = useRef();
@@ -47,12 +57,18 @@ const PagePractice = () => {
          <div className={styles.cardContainer}>
             <img src={btnPrev} className={styles.btnPrev} alt="btnPrev" onClick={handlePrev} />
             <div className={styles.cardPractice}>
-               <p className="textDashed">{wordsList[currentIndex].wordgreek}</p>
-               <p className="textGrey">{wordsList[currentIndex].wordclass}</p>
-               {//условный рендеринг для отображения кнопки или перевода после клика по кнопке
-                  !clicked 
-                  ? (<button className={styles.btnCheck} onClick={handleClicked} ref={ref}>check</button>)
-                  : (<p className={styles.wordTranslated}>{wordsList[currentIndex].wordenglish}</p>)
+               {//условный рендеринг для проверки доступности слов
+                  wordsList.length > 0
+                  ? (<>
+                        <p className="textDashed">{wordsList[currentIndex].wordgreek}</p>
+                        <p className="textGrey">{wordsList[currentIndex].wordclass}</p>
+                        {//условный рендеринг для отображения кнопки или перевода после клика по кнопке
+                           !clicked 
+                           ? (<button className={styles.btnCheck} onClick={handleClicked} ref={ref}>check</button>)
+                           : (<p className={styles.wordTranslated}>{wordsList[currentIndex].wordenglish}</p>)
+                        }
+                     </>)
+                  : (<p className="textGrey">Words are unavailable</p>)
                }
             </div>
             <img src={btnNext} className={styles.btnNext} alt="btnNext" onClick={handleNext} />

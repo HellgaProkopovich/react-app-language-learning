@@ -7,9 +7,12 @@
     width: 180px;
     /* height: 100vh; */
     height: 100%;
+    /* height: (100vh - 30px); */
     /* ВЫСОТА НЕ РАБОТАЕТ */
     z-index: 1000; /* Чтобы меню было поверх основного контента */
     overflow-y: auto; /* Если контента будет много, добавляет скроллинг */
+
+    /* box-sizing: border-box; */
 
     display: flex;
     flex-direction: column;
