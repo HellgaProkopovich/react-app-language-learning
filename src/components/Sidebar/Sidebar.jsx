@@ -21,6 +21,16 @@ const Sidebar = () => {
             <img src={iconPractice} className={styles.icon} alt="icon practice" />
             <p>practice</p>
          </NavLink>
+
+         {/* <NavLink to="/wordsAPI" className={styles.link}>
+            <img src={iconWords} className={styles.icon} alt="icon words" />
+            <p>words API</p>
+         </NavLink>
+         <NavLink to="/practiceAPI" className={styles.link}>
+            <img src={iconPractice} className={styles.icon} alt="icon practice" />
+            <p>practice API</p>
+         </NavLink> */}
+
          <NavLink to="/help" className={styles.link}>
             <img src={iconHelp} className={styles.icon} alt="icon help" />
             <p>help</p>
