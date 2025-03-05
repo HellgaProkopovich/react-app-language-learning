@@ -1,42 +1,72 @@
 import { useState } from 'react';
 import styles from '../PageWords/pageWords.module.css';
 
-const FormEditWord = ({ wordAPI, onSave }) => {
-   const [updatedWordAPI, setUpdatedWordAPI] = useState(wordAPI);
+const FormEditWord = ({ wordAPI, onSubmitUpdateWord }) => {
+   const [updatedWordAPI, setUpdatedWordAPI] = useState({
+      id: wordAPI.id,
+      english: wordAPI.english,
+      transcription: wordAPI.transcription,
+      russian: wordAPI.russian,
+   });
+
+   // const [english, setEnglish] = useState();
+   // const [transcription, setTranscription] = useState();
+   // const [russian, setRussian] = useState();
 
    const handleChange = (e) => {
-      setUpdatedWordAPI({ ...updatedWordAPI, [e.target.name]: e.target.value });
+      setUpdatedWordAPI({ 
+         ...updatedWordAPI, 
+         [e.target.name]: e.target.value 
+      });
    };
 
-   const handleSave = () => {
-      onSave(updatedWordAPI);
-   };
+   const handleSubmitUpdateWord = (e) => {
+      e.preventDefault();
+      // const updatedWordAPI = {
+      //    english,
+      //    transcription,
+      //    russian,
+      //    tags: "",
+      //    tags_json: "",
+      // };
+      console.log(updatedWordAPI);
+      onSubmitUpdateWord(updatedWordAPI);
+   }
 
    return (
-      <div className={styles.wordRow}>
+      <form
+      onSubmit={handleSubmitUpdateWord}
+      className={styles.formAddWordRow}>
          <input
             name="english"
             type="text"
             value={updatedWordAPI.english}
             onChange={handleChange}
-            className={styles.wordCell}
+            // onChange={(e) => setEnglish(e.target.value)}
+            className={styles.formAddWordCell}
          />
          <input
             name="transcription"
             type="text"
             value={updatedWordAPI.transcription}
             onChange={handleChange}
-            className={styles.wordCell}
+            // onChange={(e) => setTranscription(e.target.value)}
+            className={styles.formAddWordCell}
          />
          <input
             name="russian"
             type="text"
             value={updatedWordAPI.russian}
             onChange={handleChange}
-            className={styles.wordCell}
+            // onChange={(e) => setRussian(e.target.value)}
+            className={styles.formAddWordCell}
          />
-         <button className={styles.formSaveBtn} onClick={handleSave}>Save</button>
-      </div>
+         <button
+            type='submit'
+            className={styles.formSaveBtn}>
+            save
+         </button>
+      </form>
    );
 };
 

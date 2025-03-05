@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types'; // импортируем PropTypes, чтобы ESLint смог проверить тип onSubmitInFormAddWord
+import PropTypes from 'prop-types'; // импортируем PropTypes, чтобы ESLint смог проверить тип onSubmitAddWord
 import styles from '../PageWords/pageWords.module.css';
 
-const FormAddWord = ({ onSubmitInFormAddWord }) => {
+const FormAddWord = ({ onSubmitAddWord }) => {
    const [english, setEnglish] = useState("");
    const [transcription, setTranscription] = useState("");
    const [russian, setRussian] = useState("");
 
-   const handleSubmit = (e) => {
+   const handleSubmitAddWord = (e) => {
       e.preventDefault();
       const newWordAPI = {
          english,
@@ -17,14 +17,14 @@ const FormAddWord = ({ onSubmitInFormAddWord }) => {
          tags_json: "",
       };
       console.log(newWordAPI);
-      onSubmitInFormAddWord(newWordAPI);
-      setEnglish("");
+      onSubmitAddWord(newWordAPI);
+      setEnglish(""); // clear form
       setTranscription("");
       setRussian("");
    };
 
    return (
-      <form onSubmit={handleSubmit} className={styles.formAddWordRow}>
+      <form onSubmit={handleSubmitAddWord} className={styles.formAddWordRow}>
          <label htmlFor=""><input 
             type="text" 
             placeholder='word in English'
@@ -56,7 +56,7 @@ const FormAddWord = ({ onSubmitInFormAddWord }) => {
 };
 
 FormAddWord.propTypes = {
-   onSubmitInFormAddWord: PropTypes.func.isRequired, // говорим, что `onSubmit` должен быть функцией и обязательным
+   onSubmitAddWord: PropTypes.func.isRequired, // говорим, что `onSubmit` должен быть функцией и обязательным
 };
 
 export default FormAddWord;
