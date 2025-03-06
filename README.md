@@ -1,18 +1,18 @@
-## Greek Language Learning App
+# Greek Language Learning App
 
 A simple React app for learning words with interactive features.
 
-# Features
+## Features
 
 -   Add, edit, delete words
 -   Practice mode to test vocabulary
 -   Responsive design for all devices
 
-# Tech Stack
+## Tech Stack
 
 Frontend: React, Vite, CSS Modules
 
-# Usage
+## Usage
 
 -   Manage Words: Add, edit, and delete words in the vocabulary list.
 -   Practice: Test your knowledge in the practice section.
