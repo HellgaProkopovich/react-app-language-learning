@@ -1,13 +1,20 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types'; // импортируем PropTypes, чтобы ESLint смог проверить тип
 import styles from '../PageWords/pageWords.module.css';
 
 const FormEditWord = ({ wordAPI, onSubmitUpdateWord }) => {
-   const [updatedWordAPI, setUpdatedWordAPI] = useState({
-      id: wordAPI.id,
-      english: wordAPI.english,
-      transcription: wordAPI.transcription,
-      russian: wordAPI.russian,
-   });
+   // const [updatedWordAPI, setUpdatedWordAPI] = useState({
+   //    id: wordAPI.id,
+   //    english: wordAPI.english,
+   //    transcription: wordAPI.transcription,
+   //    russian: wordAPI.russian,
+   // });
+
+   const [updatedWordAPI, setUpdatedWordAPI] = useState(
+      wordAPI
+         ? { id: wordAPI.id, english: wordAPI.english, transcription: wordAPI.transcription, russian: wordAPI.russian }
+         : { id: "", english: "", transcription: "", russian: "" } // если `wordAPI` пустой, задаем безопасные значения
+   );
 
    // const [english, setEnglish] = useState();
    // const [transcription, setTranscription] = useState();
@@ -69,5 +76,18 @@ const FormEditWord = ({ wordAPI, onSubmitUpdateWord }) => {
       </form>
    );
 };
+
+FormEditWord.propTypes = {
+   wordAPI: PropTypes.shape({ // Проверяем, что wordAPI - это объект с нужными ключами
+      id: PropTypes.number.isRequired, // id - число, обязательный
+      english: PropTypes.string.isRequired, // english - строка, обязательная
+      transcription: PropTypes.string.isRequired, // transcription - строка, обязательная
+      russian: PropTypes.string.isRequired, // russian - строка, обязательная
+   }),
+   onSubmitUpdateWord: PropTypes.func.isRequired, // Функция обязательна
+};
+// ESLint проверяет, передаются ли в компонент правильные пропсы.
+// PropTypes.shape({...}) говорит, что wordAPI должен быть объектом с id, english, transcription и russian.
+// .isRequired говорит, что все поля обязательны.
 
 export default FormEditWord;

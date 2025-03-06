@@ -87,20 +87,6 @@ function App() {
         </Routes>
       </main>
     </WordsAPIContext.Provider>
-
-    // <>
-    //   <Sidebar />
-
-    //   <main className="maincontent">
-    //     <Routes>
-    //       <Route index element={<PageHome />} />
-    //       <Route path="words" element={<PageWords />} />
-    //       <Route path="practice" element={<PagePractice />} />
-    //       <Route path="help" element={<PageHelp />} />
-    //       <Route path='*' element={<PageNoFound />} />
-    //     </Routes>
-    //   </main>
-    // </>
   )
 };
 
