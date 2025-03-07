@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
-import wordsList from '../words.js';
+import { useContext, useState, useEffect, useRef } from 'react';
+// import wordsList from '../words.js';
+import WordsAPIContext from '../../contexts/WordsAPIContext';
 
 import btnNext from '../../assets/arrow_right.svg';
 import btnPrev from '../../assets/arrow_left.svg';
@@ -7,11 +8,19 @@ import btnPrev from '../../assets/arrow_left.svg';
 import styles from '../PagePractice/pagePractice.module.css';
 
 const PagePracticeAPI = () => {
+   const { 
+      wordsAPI, 
+      fetchWordsAPIFunc,
+   } = useContext(WordsAPIContext);
+
+   useEffect(() => {fetchWordsAPIFunc()}, 
+   []
+   );
    // for rendering words from array
    const [currentIndex, setCurrentIndex] = useState(0);
 
    // for counting number of learnt words
-   const [countLearntWords, setCountLearntWords] = useState(1);
+   const [countLearntWords, setCountLearntWords] = useState(0);
 
    // for button 'check'
    const [clicked, setClicked] = useState(false); // хук: состояние, метод = начальное значение(показываем кнопку check)
@@ -28,14 +37,14 @@ const PagePracticeAPI = () => {
    const handlePrev = () => {
       setClicked(false);
       setCurrentIndex((index) => index - 1 < 0 // если индекс меньше нуля
-         ? wordsList.length - 1 // показываем самое последнее слово
+         ? wordsAPI.length - 1 // показываем самое последнее слово
          : index - 1); // а если нет, показываем предыдущее
    }
 
    // for btn next
    const handleNext = () => {
       setClicked(false);
-      setCurrentIndex((index) => index + 1 < wordsList.length // если индекс меньше длины массива
+      setCurrentIndex((index) => index + 1 < wordsAPI.length // если индекс меньше длины массива
          ? index + 1 // показываем следующее
          : 0); // а если больше, показываем самое первое слово
    }
@@ -47,17 +56,17 @@ const PagePracticeAPI = () => {
          <div className={styles.cardContainer}>
             <img src={btnPrev} className={styles.btnPrev} alt="btnPrev" onClick={handlePrev} />
             <div className={styles.cardPractice}>
-               <p className="textDashed">{wordsList[currentIndex].wordgreek}</p>
-               <p className="textGrey">{wordsList[currentIndex].wordclass}</p>
+               <p className="textDashed">{wordsAPI[currentIndex].english}</p>
+               <p className="textGrey">{wordsAPI[currentIndex].transcription}</p>
                {//условный рендеринг для отображения кнопки или перевода после клика по кнопке
                   !clicked 
                   ? (<button className={styles.btnCheck} onClick={handleClicked} ref={ref}>check</button>)
-                  : (<p className={styles.wordTranslated}>{wordsList[currentIndex].wordenglish}</p>)
+                  : (<p className={styles.wordTranslated}>{wordsAPI[currentIndex].russian}</p>)
                }
             </div>
             <img src={btnNext} className={styles.btnNext} alt="btnNext" onClick={handleNext} />
          </div>
-         <p className="textGrey">{countLearntWords} / {wordsList.length}</p>
+         <p className="textGrey">{countLearntWords} / {wordsAPI.length}</p>
       </div>
    )
 };

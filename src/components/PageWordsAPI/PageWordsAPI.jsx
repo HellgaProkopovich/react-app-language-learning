@@ -64,7 +64,8 @@ const PageWordsAPI = () => {
    return (
       <div className={styles.wordsListContainer}>
          <p className="textGrey">[the words from API]</p>
-         <h1 className="title">Words from API</h1>
+         <h1 className="title">words from API</h1>
+         <h2 className="textDashed">usage useContext</h2>
          <div className={styles.wordsTable}>
             <FormAddWord onSubmitAddWord={handleAddWordAPIFunc} />
 
@@ -87,11 +88,8 @@ const PageWordsAPI = () => {
                   ))}
                </div>)
             : (<>
-                  {wordsAPI.map((wordAPI) => (
-                     <div
-                        key={wordAPI.id}
-                        className={styles.wordRow}
-                     >
+                  {wordsAPI.slice().reverse().map((wordAPI) => ( // slice().reverse() => отображаем список слов в обратном порядке
+                     <div key={wordAPI.id}>
                         {editingWordAPI?.id === wordAPI.id
                         ? ( // Показываем форму редактирования, если слово редактируется
                            <FormEditWord 
@@ -99,7 +97,7 @@ const PageWordsAPI = () => {
                               onSubmitUpdateWord={handleUpdateWordAPIFunc} 
                            />
                         ) : (// Если не редактируем, показываем строку обычного слова
-                           <>
+                           <div className={styles.wordRow}>
                               <div className={styles.wordCell}>{wordAPI.english}</div>
                               <div className={styles.wordCell}>{wordAPI.transcription}</div>
                               <div className={styles.wordCell}>{wordAPI.russian}</div>
@@ -109,7 +107,7 @@ const PageWordsAPI = () => {
                                  <img src={iconDelete} className={styles.icontable} alt="delete"
                                     onClick={() => handleDeleteWordAPIFunc(wordAPI.id)} />
                               </div>
-                           </>
+                           </div>
                         )}
                      </div>
                   ))}
