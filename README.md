@@ -1,12 +1,20 @@
-# About project
+# Language Learning App
 
-This is an app for learning Greek
+A simple React app for learning words with interactive features.
+Here is a branch with using words from API and using useContext for state management.
 
-# React + Vite
+## Features
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+-   The vocabulary list rendering from API
+-   Add, edit, delete words
+-   Practice mode to test vocabulary
+-   Responsive design for all devices
 
-Currently, two official plugins are available:
+## Tech Stack
 
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Frontend: React, Vite, CSS Modules
+
+## Usage
+
+-   Manage Words: Add, edit, and delete words in the vocabulary list.
+-   Practice: Test your knowledge in the practice section.
