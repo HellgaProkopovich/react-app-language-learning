@@ -90,7 +90,7 @@ const PageHelp = () => {
    return (
       <div className={styles.pageHelpContainer}>
          <p className="textGrey">[the help]</p>
-         <h1 className="title">η βοήθεια</h1>
+         <h1 className="title">help page</h1>
          <h2 className="textDashed">What can we help you with?</h2>
          <div className={styles.formHelpContainer}>
             <div className={styles.formHelpText}>

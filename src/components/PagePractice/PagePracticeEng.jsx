@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import wordsList from '../words.js';
+import wordsList from '../wordsEng.js';
 
 import btnNext from '../../assets/arrow_right.svg';
 import btnPrev from '../../assets/arrow_left.svg';
@@ -53,19 +53,20 @@ const PagePractice = () => {
    return (
       <div className={styles.pagePracticeContainer}>
          <p className="textGrey">[the exercise]</p>
-         <h1 className="title">η άσκηση</h1>
+         <h1 className="title">the exercise</h1>
+         <h2 className="textDashed">usage mobX</h2>
          <div className={styles.cardContainer}>
             <img src={btnPrev} className={styles.btnPrev} alt="btnPrev" onClick={handlePrev} />
             <div className={styles.cardPractice}>
                {//условный рендеринг для проверки доступности слов
                   wordsList.length > 0
                   ? (<>
-                        <p className="textDashed">{wordsList[currentIndex].wordgreek}</p>
-                        <p className="textGrey">{wordsList[currentIndex].wordclass}</p>
+                        <p className="textDashed">{wordsList[currentIndex].english}</p>
+                        <p className="textGrey">{wordsList[currentIndex].transcription}</p>
                         {//условный рендеринг для отображения кнопки или перевода после клика по кнопке
                            !clicked 
                            ? (<button className={styles.btnCheck} onClick={handleClicked} ref={ref}>check</button>)
-                           : (<p className={styles.wordTranslated}>{wordsList[currentIndex].wordenglish}</p>)
+                           : (<p className={styles.wordTranslated}>{wordsList[currentIndex].russian}</p>)
                         }
                      </>)
                   : (<p className="textGrey">Words are unavailable</p>)

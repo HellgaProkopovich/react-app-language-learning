@@ -11,7 +11,7 @@ const Sidebar = () => {
       <nav className={styles.sidebar}>
          <Link to="/" className={styles.logo}>               
             <img src={logo} className={styles.logopic} alt="logo" />
-            <p>μιλάω ελληνικά</p>
+            <p>speak English</p>
          </Link>
          <NavLink to="/words" className={styles.link}>
             <img src={iconWords} className={styles.icon} alt="icon words" />

@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router';
 import Sidebar from './components/Sidebar/Sidebar';
 import PageHome from './components/PageHome/PageHome';
-import PageWords from './components/PageWords/PageWords';
-import PagePractice from './components/PagePractice/PagePractice';
+import PageWords from './components/PageWords/PageWordsEng';
+import PagePractice from './components/PagePractice/PagePracticeEng';
 import PageHelp from './components/PageHelp/PageHelp';
 import PageNoFound from './components/PageNoFound/PageNoFound';
 
