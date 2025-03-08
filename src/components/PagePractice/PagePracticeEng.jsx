@@ -11,7 +11,7 @@ const PagePractice = () => {
    const [currentIndex, setCurrentIndex] = useState(0);
 
    // for counting number of learnt words
-   const [countLearntWords, setCountLearntWords] = useState(1);
+   const [countLearntWords, setCountLearntWords] = useState(0);
    const [learntWords, setLearntWords] = useState([]); // храним индексы уже изученных слов, чтобы шёл счёт только при первом клике на check
 
    // for button 'check'
