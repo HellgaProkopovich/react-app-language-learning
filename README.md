@@ -1,4 +1,4 @@
-# Language Learning App
+# Greek Language Learning App
 
 A simple React app for learning words with interactive features.
 
