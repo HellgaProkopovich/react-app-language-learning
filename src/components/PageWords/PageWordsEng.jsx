@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import wordsList from '../wordsEng.js';
+// import wordsList from '../wordsEng.js';
+import wordsStore from '../../store/wordsStore';
+import { observer } from 'mobx-react-lite';
 
 import iconEdit from '../../assets/icon-edit.svg';
 import iconDelete from '../../assets/icon-delete.svg';
@@ -8,18 +10,23 @@ import iconEditYes from '../../assets/icon-check-yes.svg';
 import iconEditNo from '../../assets/icon-check-no.svg';
 import styles from './pageWords.module.css';
 
-// ADD
+// v ADD
 //--------
-// EDIT:
+// v EDIT:
 // ПОДТВЕРДИТЬ РЕДАКЦИЮ => принять изменения и отобразить изменённое слово
 // V ОТМЕНИТЬ РЕДАКЦИЮ => (НЕ принять изменения) и отобразить слово, каким оно было
 // -------
-// DELETE
+// v DELETE
 
-const PageWords = () => {
-   // const [wordsList, setWordsList] = useState([]); - for edit
-   // const [newWord, setNewWord] = useState([]);
+const PageWords = observer(() => { // оборачиваем в observer, чтобы приложение все заменяло автоматически
+   const { words, fetchWords, addWord, updateWord, deleteWord } = wordsStore; // извлекаем (деструктуризируем) то, что нам надо из хранилища
+   
+   // GET WORDS
+   useEffect(() => {
+      fetchWords();
+   }, []);
 
+   // ADD new word
    const [english, setEnglish] = useState("");
    const [transcription, setTranscription] = useState("");
    const [russian, setRussian] = useState("");
@@ -33,24 +40,37 @@ const PageWords = () => {
          tags_json: "",
       };
       console.log(newWord);
-
-      // добавляем в массив
-      // setNewWord((newWord) => [...wordsList, newWord]);
-      // setWordsList((wordsList) => [...wordsList, newWord]); 
-      // setWordsList((prevWords) => [...prevWords, newWord]);
-
+      addWord(newWord);
       setEnglish(""); // clear form
       setTranscription("");
       setRussian("");
    }
 
+
+
+   // EDIT word
    // Состояние для хранения редактируемого слова
    const [editingWord, setEditingWord] = useState(null);
    // function for switching on editing mode
    const handleEditClick = (word) => {setEditingWord(word)}; // memorize what word is editing
 
-   // const handleEditYesClick - дописать
-   const handleEditNoClick = () => {setEditingWord(null)}; // or null?
+   // EDIT CONFIRM word
+   const handleEditConfirmClick = (updatedWord, e) => {
+      e.preventDefault();
+      // надо дописать события onChange, чтобы ловить, что пишут в форме, и повесить их на поля формы
+      updateWord(updatedWord);
+      setEditingWord(updatedWord);
+   };
+
+   // EDIT CANCEL word
+   const handleEditCancelClick = () => {setEditingWord(null)};
+
+
+
+   // DELETE word
+   const handleDeleteClick = (id) => {
+      deleteWord(id);
+   };
 
    return (
       <div className={styles.wordsListContainer}>
@@ -83,12 +103,12 @@ const PageWords = () => {
             </form>
             
             {/* words table */}
-            {wordsList.slice().reverse().map((word) => ( // slice().reverse() => отображаем список слов в обратном порядке
+            {words.slice().reverse().map((word) => ( // slice().reverse() => отображаем список слов в обратном порядке
                <div key={word.id}>
                   {editingWord?.id === word.id
+
                   ? ( // show form edit word, if editing
-                     <form 
-                     // onSubmit={handleSubmitUpdateWord}
+                     <form
                      className={styles.formAddWordRow}>
                         <input
                            name="english"
@@ -116,12 +136,13 @@ const PageWords = () => {
                         />
                         <div className={styles.wordCell}>
                            <img src={iconEditYes} className={styles.icontable} alt="edityes"
-                              // onClick={() => handleEditYesClick(word)}
+                              onClick={() => handleEditConfirmClick(word)}
                                />
                            <img src={iconEditNo} className={styles.icontable} alt="editno"
-                              onClick={() => handleEditNoClick(word)} />
+                              onClick={() => handleEditCancelClick(word)} />
                         </div>
                      </form>
+
                   ) : ( // if not, show table row
                      <div className={styles.wordRow}>
                         <div className={styles.wordCell}>{word.english}</div>
@@ -130,16 +151,18 @@ const PageWords = () => {
                         <div className={styles.wordCell}>
                            <img src={iconEdit} className={styles.icontable} alt="edit"
                               onClick={() => handleEditClick(word)} />
-                           <img src={iconDelete} className={styles.icontable} alt="delete" />
+                           <img src={iconDelete} className={styles.icontable} alt="delete"
+                              onClick={() => handleDeleteClick(word.id)} />
                         </div>
                      </div>
                   )}
+
                </div>
             ))}
 
          </div>
       </div>
    )
-};
+});
 
 export default PageWords;

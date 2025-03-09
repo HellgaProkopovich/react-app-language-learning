@@ -19,7 +19,7 @@ const PagePractice = () => {
 
    const handleClicked = () => {
       setClicked(true); // показываем перевод при клике на check
-      // проверяем, есть ли уже это слово в списке изученных
+      // проверяем, есть ли уже это слово в списке изученных (по которым кликнули на btn check)
       if (!learntWords.includes(currentIndex)) { // если нет
          setLearntWords([...learntWords, currentIndex]); // то добавляем новый индекс(слово)
          setCountLearntWords(countLearntWords + 1); // и увеличиваем счётчик
