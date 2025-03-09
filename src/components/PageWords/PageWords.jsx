@@ -28,12 +28,11 @@ import styles from './pageWords.module.css';
 // Когда пользователь добавляет/удаляет/редактирует слово, ты обновляешь LocalStorage.
 // При загрузке страницы ты загружаешь слова из LocalStorage и отображаешь их.
 // Пример:
-
 // useEffect(() => {
 //    localStorage.setItem("wordsList", JSON.stringify(wordsList));
 // }, [wordsList]); // сохраняем, когда wordsList изменяется
-// А при загрузке приложения:
 
+// А при загрузке приложения:
 // useEffect(() => {
 //    const savedWords = JSON.parse(localStorage.getItem("wordsList"));
 //    if (savedWords) {
