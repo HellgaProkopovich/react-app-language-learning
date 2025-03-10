@@ -1,14 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
-import wordsList from '../wordsEng.js';
+
+// import wordsList from '../wordsEng.js';
+import wordsStore from '../../store/wordsStore';
+import { observer } from 'mobx-react-lite';
 
 import btnNext from '../../assets/arrow_right.svg';
 import btnPrev from '../../assets/arrow_left.svg';
 // import classNames from 'classnames';
 import styles from '../PagePractice/pagePractice.module.css';
 
-const PagePractice = () => {
+const PagePractice = observer(() => {
    // for rendering words from array
    const [currentIndex, setCurrentIndex] = useState(0);
+   const { words, fetchWords } = wordsStore; // извлекаем (деструктуризируем) то, что нам надо из хранилища
+   // GET WORDS
+   useEffect(() => {
+      fetchWords();
+   }, []);
 
    // for counting number of learnt words
    const [countLearntWords, setCountLearntWords] = useState(0);
@@ -38,14 +46,14 @@ const PagePractice = () => {
    const handlePrev = () => {
       setClicked(false);
       setCurrentIndex((index) => index - 1 < 0 // если индекс меньше нуля
-         ? wordsList.length - 1 // показываем самое последнее слово
+         ? words.length - 1 // показываем самое последнее слово
          : index - 1); // а если нет, показываем предыдущее
    }
 
    // for btn next
    const handleNext = () => {
       setClicked(false);
-      setCurrentIndex((index) => index + 1 < wordsList.length // если индекс меньше длины массива
+      setCurrentIndex((index) => index + 1 < words.length // если индекс меньше длины массива
          ? index + 1 // показываем следующее
          : 0); // а если больше, показываем самое первое слово
    }
@@ -59,14 +67,14 @@ const PagePractice = () => {
             <img src={btnPrev} className={styles.btnPrev} alt="btnPrev" onClick={handlePrev} />
             <div className={styles.cardPractice}>
                {//условный рендеринг для проверки доступности слов
-                  wordsList.length > 0
+                  words.length > 0
                   ? (<>
-                        <p className="textDashed">{wordsList[currentIndex].english}</p>
-                        <p className="textGrey">{wordsList[currentIndex].transcription}</p>
+                        <p className="textDashed">{words[currentIndex].english}</p>
+                        <p className="textGrey">{words[currentIndex].transcription}</p>
                         {//условный рендеринг для отображения кнопки или перевода после клика по кнопке
                            !clicked 
                            ? (<button className={styles.btnCheck} onClick={handleClicked} ref={ref}>check</button>)
-                           : (<p className={styles.wordTranslated}>{wordsList[currentIndex].russian}</p>)
+                           : (<p className={styles.wordTranslated}>{words[currentIndex].russian}</p>)
                         }
                      </>)
                   : (<p className="textGrey">Words are unavailable</p>)
@@ -74,9 +82,9 @@ const PagePractice = () => {
             </div>
             <img src={btnNext} className={styles.btnNext} alt="btnNext" onClick={handleNext} />
          </div>
-         <p className="textGrey">{countLearntWords} / {wordsList.length}</p>
+         <p className="textGrey">{countLearntWords} / {words.length}</p>
       </div>
    )
-};
+});
 
 export default PagePractice;

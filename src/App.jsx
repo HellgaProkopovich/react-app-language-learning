@@ -15,7 +15,7 @@ import './variables.css';
 
 function App() {
   return (
-    <Provider wordsStore={wordsStore}> {/* Все компоненты, которые требуют доступ к словам, теперь могут получить его через контекст MobX */}
+    <Provider wordsStore={wordsStore}> {/* Все компоненты, которые требуют доступ к словам, теперь могут получить его через MobX */}
       <main className="maincontent">
         <Sidebar />
         <Routes>
