@@ -9,7 +9,9 @@ class WordsStore { // создаёт класс, который управляе
    fetchWords = async () => {
       const response = await fetch("/api/words");
       const data = await response.json();
-      this.words = data;
+      runInAction(() => {
+         this.words = data;
+      });
    };
 
    addWord = async (newWord) => {

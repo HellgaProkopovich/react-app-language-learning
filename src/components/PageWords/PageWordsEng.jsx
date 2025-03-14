@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import wordsStore from '../../store/wordsStore';
 import { observer } from 'mobx-react-lite';
 
+import Loading from '../Loading/Loading';
+
 import iconEdit from '../../assets/icon-edit.svg';
 import iconDelete from '../../assets/icon-delete.svg';
 import iconEditYes from '../../assets/icon-check-yes.svg';
@@ -16,7 +18,7 @@ const PageWords = observer(() => { // оборачиваем в observer, что
    // GET WORDS
    useEffect(() => {
       fetchWords();
-   }, [fetchWords]); // React ESLint рекомендует добавить fetchWords в массив зависимостей, так как fetchWords может изменяться между рендерами, а не оставлять пустой массив []
+   }, [fetchWords]); // React ESLint рекомендует добавить fetchWords в массив зависимостей (так как fetchWords может изменяться между рендерами), а не оставлять пустой массив []
 
    // ADD new word
    const [english, setEnglish] = useState("");
@@ -64,16 +66,6 @@ const PageWords = observer(() => { // оборачиваем в observer, что
    useEffect(() => {
       setLoading(false) //Выключаем индикатор loading
    }, []);
-   const bars = [
-      { id: 1, left: 0, top: "27px", delay: 0.45, rotate: -90 },
-      { id: 2, left: "8px", top: "10px", delay: 0.6, rotate: -45 },
-      { id: 3, left: "25px", top: "3px", delay: 0.75, rotate: 0 },
-      { id: 4, right: "8px", top: "10px", delay: 0.9, rotate: 45 },
-      { id: 5, right: 0, top: "27px", delay: 1.05, rotate: 90 },
-      { id: 6, right: "8px", bottom: "7px", delay: 1.2, rotate: 135 },
-      { id: 7, left: "25px", bottom: 0, delay: 1.35, rotate: 180 },
-      { id: 8, left: "8px", bottom: "7px", delay: 1.5, rotate: -135 },
-   ];
 
    return (
       <div className={styles.wordsListContainer}>
@@ -107,77 +99,61 @@ const PageWords = observer(() => { // оборачиваем в observer, что
             
             {/* words table */}
             { loading
-            ? (<div className={styles.floatingBars}>
-                  {/* <p>Loading ...</p> */}
-                  {bars.map((bar) => (
-                  <div
-                     key={bar.id}
-                     className={styles.block}
-                     style={{
-                        left: bar.left,
-                        right: bar.right,
-                        top: bar.top,
-                        bottom: bar.bottom,
-                        animationDelay: `${bar.delay}s`,
-                        transform: `rotate(${bar.rotate}deg)`,
-                     }}
-                  ></div>
+               ? (<Loading />)
+               : (<>
+                  {words.slice().reverse().map((word) => ( // slice().reverse() => отображаем список слов в обратном порядке
+                     <div key={word.id}>
+                        {editingWord?.id === word.id
+
+                           ? ( // show form edit word, if editing
+                              <form
+                              className={styles.formAddWordRow}>
+                                 <input
+                                    name="english"
+                                    type="text"
+                                    value={editingWord.english}
+                                    onChange={(e) => setEditingWord({...editingWord, english: e.target.value})}
+                                    className={styles.formAddWordCell}
+                                 />
+                                 <input
+                                    name="transcription"
+                                    type="text"
+                                    value={editingWord.transcription}
+                                    onChange={(e) => setEditingWord({...editingWord,transcription: e.target.value})}
+                                    className={styles.formAddWordCell}
+                                 />
+                                 <input
+                                    name="russian"
+                                    type="text"
+                                    value={editingWord.russian}
+                                    onChange={(e) => setEditingWord({...editingWord,russian: e.target.value})}
+                                    className={styles.formAddWordCell}
+                                 />
+                                 <div className={styles.wordCell}>
+                                    <img src={iconEditYes} className={styles.icontable} alt="edityes"
+                                       onClick={handleEditConfirmClick} />
+                                    <img src={iconEditNo} className={styles.icontable} alt="editno"
+                                       onClick={() => handleEditCancelClick(word)} />
+                                 </div>
+                              </form>)
+
+                           : ( // if not, show table row
+                              <div className={styles.wordRow}>
+                                 <div className={styles.wordCell}>{word.english}</div>
+                                 <div className={styles.wordCell}>{word.transcription}</div>
+                                 <div className={styles.wordCell}>{word.russian}</div>
+                                 <div className={styles.wordCell}>
+                                    <img src={iconEdit} className={styles.icontable} alt="edit"
+                                       onClick={() => handleEditClick(word)} />
+                                    <img src={iconDelete} className={styles.icontable} alt="delete"
+                                       onClick={() => handleDeleteClick(word.id)} />
+                                 </div>
+                              </div>)
+                        }
+
+                     </div>
                   ))}
-               </div>)
-            : (<>
-               {words.slice().reverse().map((word) => ( // slice().reverse() => отображаем список слов в обратном порядке
-                  <div key={word.id}>
-                     {editingWord?.id === word.id
-
-                     ? ( // show form edit word, if editing
-                        <form
-                        className={styles.formAddWordRow}>
-                           <input
-                              name="english"
-                              type="text"
-                              value={editingWord.english}
-                              onChange={(e) => setEditingWord({...editingWord, english: e.target.value})}
-                              className={styles.formAddWordCell}
-                           />
-                           <input
-                              name="transcription"
-                              type="text"
-                              value={editingWord.transcription}
-                              onChange={(e) => setEditingWord({...editingWord,transcription: e.target.value})}
-                              className={styles.formAddWordCell}
-                           />
-                           <input
-                              name="russian"
-                              type="text"
-                              value={editingWord.russian}
-                              onChange={(e) => setEditingWord({...editingWord,russian: e.target.value})}
-                              className={styles.formAddWordCell}
-                           />
-                           <div className={styles.wordCell}>
-                              <img src={iconEditYes} className={styles.icontable} alt="edityes"
-                                 onClick={handleEditConfirmClick} />
-                              <img src={iconEditNo} className={styles.icontable} alt="editno"
-                                 onClick={() => handleEditCancelClick(word)} />
-                           </div>
-                        </form>
-
-                     ) : ( // if not, show table row
-                        <div className={styles.wordRow}>
-                           <div className={styles.wordCell}>{word.english}</div>
-                           <div className={styles.wordCell}>{word.transcription}</div>
-                           <div className={styles.wordCell}>{word.russian}</div>
-                           <div className={styles.wordCell}>
-                              <img src={iconEdit} className={styles.icontable} alt="edit"
-                                 onClick={() => handleEditClick(word)} />
-                              <img src={iconDelete} className={styles.icontable} alt="delete"
-                                 onClick={() => handleDeleteClick(word.id)} />
-                           </div>
-                        </div>
-                     )}
-
-                  </div>
-               ))}
-            </>)
+               </>)
             }
          </div>
       </div>

@@ -1,0 +1,26 @@
+.floatingBars {
+    position: relative;
+    width: 60px;
+    height: 75px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.block {
+    position: absolute;
+    background-color: var(--colorYellowVivid);
+    width: 10px;
+    height: 23px;
+    border-radius: 8px 8px 0 0;
+    transform: scale(0.4);
+    animation: fadeG 1.2s infinite normal;
+}
+
+@keyframes fadeG {
+    0% {
+        background-color: white;
+    }
+    100% {
+        background-color: var(--colorYellowVivid);
+    }
+}
