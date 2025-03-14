@@ -16,18 +16,18 @@ const Loading = () => {
       <div className={styles.floatingBars}>
          {/* <p>Loading ...</p> */}
          {bars.map((bar) => (
-         <div
-            key={bar.id}
-            className={styles.block}
-            style={{
-               left: bar.left,
-               right: bar.right,
-               top: bar.top,
-               bottom: bar.bottom,
-               animationDelay: `${bar.delay}s`,
-               transform: `rotate(${bar.rotate}deg)`,
-            }}
-         ></div>
+            <div
+               key={bar.id}
+               className={styles.block}
+               style={{
+                  left: bar.left,
+                  right: bar.right,
+                  top: bar.top,
+                  bottom: bar.bottom,
+                  animationDelay: `${bar.delay}s`,
+                  transform: `rotate(${bar.rotate}deg)`,
+               }}
+            ></div>
          ))}
       </div>
    )
